@@ -1,12 +1,7 @@
+require('dotenv').confiq();
 const express = require("express");
 
 const server = express();
-
-server.use(express.json());
-
-server.get('/', (req, res) => {
-    res.json({message: 'You are at the root'})
-});
 
 server.get('/heartbeat', (req, res) => {
     console.log('heartbeat', req.heartbeat);
