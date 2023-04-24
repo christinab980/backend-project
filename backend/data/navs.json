@@ -1,22 +1,18 @@
 [
     {
       "href": "/",
-      "isPrivate": false,
       "name": "Home"
     },
     {
       "href": "/gallery",
-      "isPrivate": false,
       "name": "Gallery"
     },
     {
       "href": "/about",
-      "isPrivate": false,
       "name": "About"
     },
     {
       "href": "/contact-us",
-      "isPrivate": false,
       "name": "Contact Us"
     },
     {

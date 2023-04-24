@@ -45,7 +45,7 @@ server.get('/heartbeat', (req, res) => {
 
 server.get('/login', (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs),
+     locals: setNavs(req.url, navs, !!req.session.userId),
      partials: setMainView('login')
     });
  });
@@ -66,35 +66,35 @@ server.get('/login', (req, res) => {
 
  server.get('/gallery', (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs),
+     locals: setNavs(req.url, navs , !!req.session.userId),
      partials: setMainView('gallery')
     });
  });
 
  server.get('/about', (req, res) => {
     res.render('index', {
-    locals: setNavs(req.url, navs),
+    locals: setNavs(req.url, navs, !!req.session.userId),
      partials: setMainView('about')
     });
  });
 
  server.get('/contact-us', (req, res) => {
     res.render('index', {
-    locals: setNavs(req.url, navs),
+    locals: setNavs(req.url, navs, !!req.session.userId),
      partials: setMainView('contactus')
     });
  });
 
  server.get('/logout', (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs),
+     locals: setNavs(req.url, navs, !!req.session.userId),
      partials: setMainView('logout')
     });
  });
 
  server.get('/profile', checkAuth, (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs),
+     locals: setNavs(req.url, navs, !!req.session.userId),
      partials: setMainView('profile')
     });
  });
