@@ -1,0 +1,37 @@
+[
+    {
+      "href": "/",
+      "isPrivate": false,
+      "name": "Home"
+    },
+    {
+      "href": "/gallery",
+      "isPrivate": false,
+      "name": "Gallery"
+    },
+    {
+      "href": "/about",
+      "isPrivate": false,
+      "name": "About"
+    },
+    {
+      "href": "/contact-us",
+      "isPrivate": false,
+      "name": "Contact Us"
+    },
+    {
+      "href": "/profile",
+      "isPrivate": true,
+      "name": "Profile"
+    },
+    {
+      "href": "/login",
+      "isPrivate": false,
+      "name": "Login"
+    },
+    {
+      "href": "/logout",
+      "isPrivate": true,
+      "name": "Logout"
+    }
+  ]
