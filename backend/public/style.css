@@ -47,7 +47,7 @@ nav a:first-of-type {
     margin-left: 0;
 }
 
-nav a:active {
+nav a.active {
     color: blueviolet;
 }
 

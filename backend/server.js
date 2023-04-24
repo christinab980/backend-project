@@ -5,6 +5,8 @@ const express = require("express");
 const navs = require('./data/navs.json');
 
 const server = express();
+server.use(express.static('public'))
+
 server.engine('html', es6Renderer);
 server.set('views', 'views');
 server.set('view engine', 'html')

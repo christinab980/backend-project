@@ -14,7 +14,7 @@ function setNavs(currentHref, navs) {
         }
         return nav;
     })
-    return {navs}
+    return {currentHref, navs}
 }
 
 module.exports = { setMainView, setNavs};
