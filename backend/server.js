@@ -6,6 +6,16 @@ const navs = require('./data/navs.json');
 
 const server = express();
 server.use(express.static('public'))
+server.use(express.json());
+
+const authStatus = {
+   isAuthenticated: false
+}
+
+const validCreds = {
+   password: '1234',
+   username: 'anna'
+};
 
 server.engine('html', es6Renderer);
 server.set('views', 'views');
@@ -31,6 +41,16 @@ server.get('/login', (req, res) => {
      locals: setNavs(req.url, navs),
      partials: setMainView('login')
     });
+ });
+
+ server.post('/login', (req, res) => {
+   const { password, username } = req.body;
+   if(password === validCreds.password && username === validCreds.username) {
+      authStatus.isAuthenticated = true;
+   } else {
+      authStatus.isAuthenticated = false;
+   }
+   res.json(authStatus);
  });
 
  server.get('/gallery', (req, res) => {
