@@ -1,0 +1,9 @@
+<header> 
+    <nav>
+       ${
+        navs.map(nav => `
+            <a href="${nav.href}">${nav.name}</a>
+        `).join(' ')
+       }
+    </nav>
+</header>
