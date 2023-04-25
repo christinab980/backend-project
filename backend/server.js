@@ -57,7 +57,7 @@ server.get('/login', (req, res) => {
    }
    const { password, username } = req.body;
    if(password === validCreds.password && username === validCreds.username) {
-      req.session.userID = username
+      req.session.userID = username;
       afterlogin.isAuthenticated = true;
       afterlogin.redirectTo = '/profile';
    } 
