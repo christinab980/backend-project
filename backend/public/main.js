@@ -16,6 +16,7 @@ if(window.location.pathname === '/login') {
     const stringified = stringifyFormData(data);
     const response = await doLogin(stringified);
     location.href = response.redirectTo;
+    location.href = response.redirectTo;
     console.log(`The user is logged in: ${response.isAuthenticated}`)
   };
 
