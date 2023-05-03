@@ -48,3 +48,22 @@ if(window.location.pathname === '/login') {
     return response;
   }
 }
+
+// const fetchURL = 
+// const characterSettings = {
+//   url: fetchURL,
+//   method: "GET",
+//   headers: {
+//     "X-Public-Api-Key": PUBLIC_KEY,
+//     "X-Private-Api-Key": PRIVATE_KEY,
+//   },
+// };
+// const fetchData = async () => {
+//   try {
+//     const response = await fetch(cocktailSettings.url, characterSettings);
+//     const data = await response.json();
+//     setCocktailStage(data.drinks);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
