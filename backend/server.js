@@ -64,24 +64,24 @@ server.get('/login', (req, res) => {
    res.json(afterlogin);
  });
 
- server.get('/gallery', (req, res) => {
+ server.get('/character', (req, res) => {
     res.render('index', {
      locals: setNavs(req.url, navs , !!req.session.userId),
-     partials: setMainView('gallery')
+     partials: setMainView('character')
     });
  });
 
- server.get('/about', (req, res) => {
+ server.get('/comic', (req, res) => {
     res.render('index', {
     locals: setNavs(req.url, navs, !!req.session.userId),
-     partials: setMainView('about')
+     partials: setMainView('search')
     });
  });
 
- server.get('/contact-us', (req, res) => {
+ server.get('/search', (req, res) => {
     res.render('index', {
     locals: setNavs(req.url, navs, !!req.session.userId),
-     partials: setMainView('contactus')
+     partials: setMainView('search')
     });
  });
 
