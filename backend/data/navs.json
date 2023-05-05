@@ -1,19 +1,11 @@
 [
     {
-      "href": "/",
-      "name": "Home"
+      "href": "/character",
+      "name": "Character"
     },
     {
-      "href": "/gallery",
-      "name": "Gallery"
-    },
-    {
-      "href": "/about",
-      "name": "About"
-    },
-    {
-      "href": "/contact-us",
-      "name": "Contact Us"
+      "href": "/comic",
+      "name": "Comics"
     },
     {
       "href": "/profile",
