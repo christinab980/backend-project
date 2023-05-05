@@ -1,9 +1,22 @@
 <header> 
+
     <nav>
+    
+        ${
+            home.map(nav => `
+                <a class = "${nav.className}" href="${nav.href}"> <img src="${nav.img}" alt=""> </a>
+            `).join(' ')
+           }
        ${
         navs.map(nav => `
             <a class = "${nav.className}" href="${nav.href}">${nav.name}</a>
         `).join(' ')
        }
+       ${
+        search.map(nav => `
+            <a class = "${nav.className}" href="${nav.href}"> <img src="${nav.img}" alt=""> </a>
+        `).join(' ')
+       }
     </nav>
+
 </header>

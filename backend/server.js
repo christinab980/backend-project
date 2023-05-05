@@ -4,12 +4,16 @@ const sessions = require('express-session');
 const es6Renderer = require("express-es6-template-engine");
 const express = require("express");
 const navs = require('./data/navs.json');
+const home = require('./data/home.json');
+const search = require('./data/search.json');
+
 
 const { checkAuth } = require('./middleware');
 const { setMainView, setNavs } = require('./utils');
 const server = express();
 
-server.use(express.static('public'))
+server.use("/", express.static(__dirname + "/public"));
+server.use(express.static('files'))
 server.use(express.json());
 server.use(cookieParser());
 server.use(sessions({
@@ -32,7 +36,7 @@ const PORT = process.env.PORT || 8080;
 
 server.get('/', (req, res) => {
    res.render('index', {
-    locals: { navs },
+    locals: { home, navs, search },
     partials: setMainView('landing')
    });
 });
@@ -45,7 +49,7 @@ server.get('/heartbeat', (req, res) => {
 
 server.get('/login', (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs, !!req.session.userId),
+     locals: { home, navs, search },
      partials: setMainView('login')
     });
  });
@@ -66,21 +70,21 @@ server.get('/login', (req, res) => {
 
  server.get('/character', (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs , !!req.session.userId),
+     locals: { home, navs, search },
      partials: setMainView('character')
     });
  });
 
  server.get('/comic', (req, res) => {
     res.render('index', {
-    locals: setNavs(req.url, navs, !!req.session.userId),
-     partials: setMainView('search')
+    locals: { home, navs, search },
+     partials: setMainView('comic')
     });
  });
 
  server.get('/search', (req, res) => {
     res.render('index', {
-    locals: setNavs(req.url, navs, !!req.session.userId),
+    locals: { home, navs, search },
      partials: setMainView('search')
     });
  });
@@ -92,7 +96,7 @@ server.get('/login', (req, res) => {
 
  server.get('/profile', checkAuth, (req, res) => {
     res.render('index', {
-     locals: setNavs(req.url, navs, !!req.session.userId),
+     locals: { home, navs, search },
      partials: setMainView('profile')
     });
  });

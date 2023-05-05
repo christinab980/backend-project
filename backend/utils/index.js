@@ -23,4 +23,4 @@ function setNavs(currentHref, navs, isAuthenticated) {
     return {currentHref, navs: _navs}
 }
 
-module.exports = { setMainView, setNavs};
+module.exports = { setMainView };
