@@ -58,10 +58,6 @@ nav a:first-of-type {
     margin-left: 0;
 }
 
-nav a.active {
-    color: blueviolet;
-}
-
 .credentials-container {
     display: flex;
     flex-direction: column;
@@ -105,7 +101,10 @@ nav a.active {
 }
 
 nav img {
-   height: 60px;
+   height: 50px;
+}
+.search-icon {
+    text-align: center;
 }
 
 footer img {
@@ -113,15 +112,11 @@ footer img {
 }
 
 .search-container {
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 700px;
     padding: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     margin: 0 auto;
-    left: 50%;
-    right: 50%;
     margin-top: 10px;
 }
 
@@ -147,5 +142,102 @@ input {
 }
 
 .display-container {
+    margin-top: 2em;
     padding: 1em;
+}
+
+.container-character-img {
+    background-color: #ffffff;
+    padding: 0.5em;
+    height: 9.37em;
+    width: 9.37em;
+    display: block;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.container-character-img img {
+    width: 100%;
+    position: relative;
+    width: block;
+    border-radius: 50%;
+}
+
+.character-name {
+    padding: 0.5em 0 0.8em 0;
+    text-align: center;
+    color: #323232;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.character-description, .character-specifics {
+    text-align: justify;
+    color: grey;
+    line-height: 2em;
+    font-weight: 300;
+}
+
+.character-specifics {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.list {
+    width: 90%;
+    color: grey;
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    line-height: 1.2rem;
+    z-index: 1;
+}
+
+.autocompelete-items {
+    padding: .5em;
+}
+
+.autocompelete-items:hover {
+    color: #323232;
+}
+
+.hero-img-container-comics {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url("/img/marvel-comics-banner.png");
+}
+
+.hero-img-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url("/img/character-hero-img.png");
+}
+.hero-img-container, .hero-img-container-comics {
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.hero-text, .hero-text-comics {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-transform: uppercase;
+}
+
+.features-container {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-icon {
+    max-height: 5vh;
 }

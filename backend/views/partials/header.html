@@ -4,17 +4,17 @@
     
         ${
             home.map(nav => `
-                <a class = "${nav.className}" href="${nav.href}"> <img src="${nav.img}" alt=""> </a>
+                <a class = "home-logo" href="${nav.href}"> <img src="${nav.img}" alt=""> </a>
             `).join(' ')
            }
        ${
         navs.map(nav => `
-            <a class = "${nav.className}" href="${nav.href}">${nav.name}</a>
+            <a class = "nav" href="${nav.href}">${nav.name}</a>
         `).join(' ')
        }
        ${
-        search.map(nav => `
-            <a class = "${nav.className}" href="${nav.href}"> <img src="${nav.img}" alt=""> </a>
+        search.map(search => `
+            <a class = "search-icon" href="${search.href}"> <img id="search-icon" src="${search.img}" alt=""> </a>
         `).join(' ')
        }
     </nav>
