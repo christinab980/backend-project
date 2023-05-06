@@ -56,6 +56,7 @@ const showContainer = document.getElementById('show-container');
 const listContainer = document.getElementById('list');
 const featureCharacters = document.getElementById("feature-characters");
 const landingComics = document.getElementById("popular-comics");
+const showComics = document.getElementById('show-comics')
 
 const publicKey = '9c2c83f57023818abe5c3258493fb406';
 const privateKey = 'bd3e13633fefcb16b1f1d283c66344f1dbddc5ef';
@@ -63,10 +64,12 @@ const timeStamp = 1683240244972;
 const hashValue = '2db36f8a451b0bbf1883bccc24d901af';
 
 let date = new Date();
+let characterIdValue = "";
 
-button.addEventListener('click', () => {
-  getResults();
-  // getComics();
+button.addEventListener('click', async () => {
+  const _characterIdValue = await getResults();
+  characterIdValue = _characterIdValue
+  getComics();
 })
 
 function displayWords(value) {
@@ -81,9 +84,8 @@ function removeElements() {
 }
 
 input.addEventListener("keyup", async () => {
-  removeElements();
 
-  if(input.value.length < 3) {
+  if(input.value.length < 4) {
     return false;
   }
 
@@ -91,6 +93,7 @@ input.addEventListener("keyup", async () => {
 
   const response = await fetch(url);
   const jsonData = await response.json();
+  removeElements();
 
   jsonData.data["results"].forEach((result) => {
     let name = result.name;
@@ -101,13 +104,12 @@ input.addEventListener("keyup", async () => {
     let word = "<b>" + name.substr(0, input.value.length) + "</b>";
     word += name.substr(input.value.length);
     div.innerHTML = `<p class="item"> ${word} </p>`;
-      listContainer.append(div);
+    listContainer.append(div);
   })
 })
 
  
 async function getResults() {
-  list === [];
   if (input.value.trim().length < 1) {
     alert("Input cannot be blank")
   }
@@ -117,6 +119,7 @@ async function getResults() {
   const response = await fetch(url);
   const jsonData = await response.json();
   console.log(jsonData)
+  let _characterId = ""; 
   jsonData.data['results'].forEach((element) => {
     showContainer.innerHTML = `
       <div class="card-container"> 
@@ -128,11 +131,13 @@ async function getResults() {
     </div>
     <div class="character-specifics"> <p> Comic: ${element.comics.available} | Series: ${element.series.available} | Stories: ${element.stories.available} | Events: ${element.events.available} </p>
     </div>
-    `})
+    ` 
+    _characterId = element.id 
+  })
+  return _characterId 
 };
 
-
-async function landingCharacters(query) {
+async function landingCharacters(value) {
   featureCharacters.innerHTML = ""
   value === spiderman;
   const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}&name=${value}`
@@ -149,6 +154,25 @@ async function landingCharacters(query) {
       `
   })
 }
+async function getComics() {
+  const url = `https://gateway.marvel.com:443/v1/public/comics?characters=${characterIdValue}?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
+  const response = await fetch(url);
+  const jsonData = await response.json();
+
+  console.log(jsonData)
+
+  jsonData.data['results'].forEach((element) => {
+    showComics.innerHTML = `
+      <div class="comic-container"> 
+      <div class="container-comic-img">
+        <img src = "${element.thumbnail['path']}.${element.thumbnail['extension']}" /> 
+      </div>
+    <div class="comic-name"> ${element.title} </div>
+     </div>
+    </div>"
+  ` 
+  })
+} 
 
 window.onload = () => {
   landingCharacters();
