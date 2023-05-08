@@ -1,3 +1,23 @@
+const input = document.getElementById('input-box');
+const button = document.getElementById('submit-button');
+const showContainer = document.getElementById('show-container');
+const listContainer = document.getElementById('list');
+const featureCharacters = document.getElementById("feature-characters");
+const landingComics = document.getElementById("popular-comics");
+const showComics = document.getElementById('show-comics');
+const showComic = document.getElementById('comic-container');
+const comicPageFeature = document.getElementById('comics-page-feature');
+const comicPageImg = document.getElementById('comic-page-container');
+const comicPageModal = documen.getElementById('comic-page-modal')
+
+const publicKey = '9c2c83f57023818abe5c3258493fb406';
+const privateKey = 'bd3e13633fefcb16b1f1d283c66344f1dbddc5ef';
+const timeStamp = 1683240244972;
+const hashValue = '2db36f8a451b0bbf1883bccc24d901af';
+
+let date = new Date();
+let characterIdValue = "";
+let comicsObject = 
 
 if(window.location.pathname === '/login') {
   const form = document.getElementById('form');
@@ -50,27 +70,13 @@ if(window.location.pathname === '/login') {
   }
 }
 
-const input = document.getElementById('input-box');
-const button = document.getElementById('submit-button');
-const showContainer = document.getElementById('show-container');
-const listContainer = document.getElementById('list');
-const featureCharacters = document.getElementById("feature-characters");
-const landingComics = document.getElementById("popular-comics");
-const showComics = document.getElementById('show-comics')
+if(window.location.pathname === '/search') {
 
-const publicKey = '9c2c83f57023818abe5c3258493fb406';
-const privateKey = 'bd3e13633fefcb16b1f1d283c66344f1dbddc5ef';
-const timeStamp = 1683240244972;
-const hashValue = '2db36f8a451b0bbf1883bccc24d901af';
-
-let date = new Date();
-let characterIdValue = "";
-
-button.addEventListener('click', async () => {
+  button.addEventListener('click', async () => {
   const _characterIdValue = await getResults();
   characterIdValue = _characterIdValue
   getComics();
-})
+  })
 
 function displayWords(value) {
   input.value = value;
@@ -133,9 +139,51 @@ async function getResults() {
     </div>
     ` 
     _characterId = element.id 
+    console.log(input.value)
   })
   return _characterId 
 };
+
+async function getComics() {
+  const url = `https://gateway.marvel.com:443/v1/public/comics?characters=${characterIdValue}?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
+  const response = await fetch(url);
+  const jsonData = await response.json();
+
+ renderComics(jsonData);
+} 
+
+async function renderComics(jsonData) {
+  const divTitle = document.createElement('div')
+  showContainer.append(divTitle)
+  const comicTitle = document.createElement("h2");
+  comicTitle.className = "comicTitle"
+  comicTitle.textContent = 'Comics'
+  divTitle.append(comicTitle)
+
+  for(let i = 0; i < 3; i ++) {
+    const div = document.createElement('div')
+    div.className = "comic-container"
+    div.id = "comic-container"
+
+    const div2 = document.createElement('div')
+    div2.className = "container-comic-img"
+    div.append(div2)
+
+    const img = document.createElement('img')
+    const imgPath = jsonData.data.results[i].thumbnail['path']
+    const extension = jsonData.data.results[i].thumbnail['extension']
+    img.src = imgPath + "." + extension
+    div2.append(img);
+
+    const comicName = document.createElement('div')
+    comicName.className = "comic-name"
+    comicName.textContent = jsonData.data.results[i].title
+    div2.append(comicName)
+
+    showComics.append(div)
+  }
+}
+}
 
 async function landingCharacters(value) {
   featureCharacters.innerHTML = ""
@@ -154,26 +202,184 @@ async function landingCharacters(value) {
       `
   })
 }
-async function getComics() {
-  const url = `https://gateway.marvel.com:443/v1/public/comics?characters=${characterIdValue}?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
+
+// comicPageImg.addEventListener('click', async() => {
+//   comicInfoPage();
+// })
+// async function comicInfoPage() {
+
+// }
+
+async function getComicsPage() {
+
+  const url = `https://gateway.marvel.com:443/v1/public/comics?characters=1017576?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
   const response = await fetch(url);
   const jsonData = await response.json();
-
+  
   console.log(jsonData)
+  renderComicsFeaturePage(jsonData)
+}
 
-  jsonData.data['results'].forEach((element) => {
-    showComics.innerHTML = `
-      <div class="comic-container"> 
-      <div class="container-comic-img">
-        <img src = "${element.thumbnail['path']}.${element.thumbnail['extension']}" /> 
-      </div>
-    <div class="comic-name"> ${element.title} </div>
-     </div>
-    </div>"
-  ` 
-  })
+async function comicPageFeatureCharacter() {
+  input === "Thor (Goddess of Thunder)"
+  const url = `https://gateway.marvel.com:443/v1/public/characters/1017576?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data)
+
+  renderCharacterForComicPage(data)
+}
+
+async function renderCharacterForComicPage(data) {
+  const title = document.createElement('div')
+  title.className = "thor-feature-title"
+  const h2 = document.createElement('h2')
+  h2.textContent = 'Featured Character: Thor - Goodness of Thunder'
+  title.append(h2)
+  comicPageFeature.append(title)
+
+  const div = document.createElement('div')
+  div.className = "thor-character-feature"
+  comicPageFeature.append(div)
+
+  const div1 = document.createElement('div')
+  div1.className ="thor-img-container"
+  div.append(div1)
+
+  const thorImg = document.createElement('img')
+  thorImg.className = "thorImg-comics-page"
+  const imgPath = data.data.results[0].thumbnail['path']
+  const extension = data.data.results[0].thumbnail['extension']
+  thorImg.src = imgPath + "." + extension
+  div1.append(thorImg)
+
+  const div4 = document.createElement('div')
+  div4.className = "thor-description-container"
+  div.append(div4)
+
+  const div2 = document.createElement('div')
+  div2.className = "thor-description"
+  div2.innerHTML = data.data.results[0].description
+  div4.append(div2)
+
+  const div3 = document.createElement('div')
+  div3.className = "thor-stats"
+  const comics = data.data.results[0].comics.available
+  const series = data.data.results[0].series.available
+  const stories = data.data.results[0].stories.available
+  const events = data.data.results[0].events.available
+  div3.innerHTML = `Comics: ${comics} | Series: ${series} | Stories: ${stories} | Events: ${events}`
+  div4.append(div3)
+}
+
+async function renderComicsFeaturePage(jsonData) {
+
+  const divResults = document.createElement('div')
+  divResults.className = "thor-feature"
+  comicPageFeature.append(divResults)
+
+  for(let i = 0; i < 15; i ++) {
+    const div1 = document.createElement('div')
+    div1.className = "comic-page-container"
+    div1.id = "comic-page-container"
+
+    const div2 = document.createElement('div')
+    div2.className = "comic-page-img-container"
+    div1.append(div2)
+
+    const img = document.createElement('img')
+    const imgPath = jsonData.data.results[i].thumbnail['path']
+    const extension = jsonData.data.results[i].thumbnail['extension']
+    img.src = imgPath + "." + extension
+    div2.append(img);
+
+    const comicName = document.createElement('div')
+    comicName.className = "comic-page-name"
+    comicName.textContent = jsonData.data.results[i].title
+    div2.append(comicName)
+
+    divResults.append(div1)
+  }
+
+}
+
+async function comicModal(jsonData) {
+  const sectionModal = document.createElement('section');
+  sectionModal.className = "modal-section hidden"
+  comicPageModal.append(sectionModal)
+
+  const div = document.createElement('div')
+  div.className = 'flex'
+  sectionModal.append(div)
+
+  const closeButton = document.createElement('button')
+  closeButton.textContent = 'x'
+  div.append(closeButton)
+
+  const div1 = document.createElement('div')
+  div1.className = 'modal-content'
+  sectionModal.append(div1)
+
+  const comicImg = document.createElement('img')
+  comicImg.className = "modal-image"
+  const imgPath = jsonData.data.results[0].thumbnail['path']
+  const extension = jsonData.data.results[0].thumbnail['extension']
+  img.src = imgPath + "." + extension
+  div1.append(comicImg)
+
+  const comicContainer = document.createElement('div')
+  comicContainer.className = "modal-description-container"
+  div1.append(comicContainer)
+
+  const comicTitle = document.createElement('div')
+  comicTitle.className = "modal-description"
+  comicTitle.innerHTML = jsonData.data.results[0].title
+  div1.append(comicTitle)
+
+  const pusblishdiv = document.createElement('div')
+  const h3 = document.createElement('h3')
+  h3.textContent = "Published:"
+  pusblishdiv.innerHTML = jsonData.data.results[0].dates[0].date
+  pusblishdiv.append(h3)
+  div1.append(pusblishdiv)
+
+  const writerdiv = document.createElement('div')
+  const wrtierTitle = document.createElement('h3')
+  writerTitle.textContent = "Writer:"
+  pusblishdiv.innerHTML = jsonData.data.results[0].creator[4].name
+  writerdiv.append(wrtierTitle)
+  div1.append(writerdiv)
+
+  const artistDiv = document.createElement('div')
+  const artistTitle = document.createElement('h3')
+  artistTitle.textContent = "Cover Artist:"
+  pusblishdiv.innerHTML = jsonData.data.results[0].creator[3].name
+  artistDiv.append(artistTitle)
+  div1.append(artistDiv)
+
+  const descriptionDiv = document.createElement('div')
+  const descriptionTitle = document.createElement('h3')
+  descriptionTitle.textContent = "Description:"
+  pusblishdiv.innerHTML = jsonData.data.results[0].description
+  descriptionDiv.append(descriptionTitle)
+  div1.append(descriptionDiv)
+
+  const priceDiv = document.createElement('div')
+  const priceTitle = document.createElement('h3')
+  const buyNowButton = document.createElement('button')
+  buyNowButton.className = 'modal-buy-now-button'
+  buyNowButton.id = 'modal-buy-now-button'
+  priceTitle.textContent = "Price:"
+  pusblishdiv.innerHTML = jsonData.data.results[0].prices[0].price
+  priceDiv.append(priceTitle)
+  priceDiv.append(buyNowButton)
+  div1.append(priceDiv)  
+
 } 
 
-window.onload = () => {
-  landingCharacters();
-}
+getComicsPage();
+comicPageFeatureCharacter();
+
+// window.onload = () => {
+//   landingCharacters();
+// }

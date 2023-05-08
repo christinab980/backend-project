@@ -30,9 +30,11 @@ footer {
         to top,
         rgba(2, 2, 39, .80),
         rgba(88, 220, 240, 0.464));
+    margin-top: 3000px;
 }
 
 main {
+    height: 100%;
     flex: 1;
     background-image: url("img/comicbook_background.png");
 }
@@ -132,6 +134,10 @@ input {
     outline: none;
 }
 
+.input-container {
+    justify-content: center;
+}
+
 .button {
     padding: 15px;
     border-radius: 50px;
@@ -163,13 +169,40 @@ input {
     border-radius: 50%;
 }
 
-.character-name {
+.character-name, .comicTitle, .thor-feature-title {
     padding: 0.5em 0 0.8em 0;
     text-align: center;
     color: #323232;
     text-transform: uppercase;
     font-size: 1.2em;
     font-weight: 600;
+}
+
+.thor-feature-title {
+    font-size: 1em;
+    text-align: left;
+}
+
+.comicTitle {
+    margin-top: 20px;
+}
+
+.comic-name{
+    max-width: 200px;
+}
+
+.comic-name, .comic-page-name {
+    padding: 0.5em 0 0.8em 0;
+    color: grey;
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 600;
+}
+
+.comic-page-name {
+    max-width: 120px;
+    justify-content: center;
+    padding: 10px;
 }
 
 .character-description, .character-specifics {
@@ -179,9 +212,40 @@ input {
     font-weight: 300;
 }
 
+.thor-description-container div {
+    display: flex;
+    text-align: justify;
+    color: grey;
+    line-height: 1.5em;
+    font-weight: 300; 
+}
+
+.thor-description-container {
+    padding-top: 50px;
+}
+
 .character-specifics {
     margin-top: 10px;
     font-weight: 600;
+}
+
+.show-comics {
+    display: flex;
+    padding: 1em;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.comic-container {
+    text-align: center;
+}
+
+.comic-container img {
+    padding: 0.5em;
+    height: 11em;
+    width: auto;
+    cursor: pointer;
 }
 
 .list {
@@ -191,8 +255,9 @@ input {
     flex-direction: column;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.1rem;
-    line-height: 1.2rem;
+    line-height: 1.5rem;
     z-index: 1;
+    margin-top: 6px;
 }
 
 .autocompelete-items {
@@ -212,6 +277,7 @@ input {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
     url("/img/character-hero-img.png");
 }
+
 .hero-img-container, .hero-img-container-comics {
     height: 50%;
     background-position: center;
@@ -240,4 +306,58 @@ input {
 
 #search-icon {
     max-height: 5vh;
+}
+
+.comics-page-feature {
+    width: 100%;
+    max-width: 700px;
+    padding-top: 20px;
+    padding: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.thor-feature {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.thor-stats {
+    margin-top: 15px;
+}
+.comic-page-img-container img {
+    height: 11em;
+    gap: 10px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.thorImg-comics-page {
+    height: 14em;
+    border-radius: 50%;
+    text-align: right;
+    margin: 20px;
+}
+
+.thor-character-feature {
+    display: flex;
+}
+
+@media (max-width: 60em) {
+    .comic-name {
+        max-width: 300px;
+    }
+
+    .search-container {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+    }
+
+    .input-container {
+        display: flex;
+    }
+
 }
