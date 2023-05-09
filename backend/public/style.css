@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+.autocompelete-items {
+    padding: .5em;
+}
+
+.autocompelete-items:hover {
+    color: #323232;
+}
+
 body, html {
     height: 100%;
     font-family: sans-serif;
@@ -14,133 +22,7 @@ body {
     flex-direction: column;
 }
 
-header {
-    padding: 18px;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(2, 2, 39, .80),
-        rgba(88, 220, 240, 0.464)), url("img/buildings.png");
-}
-
-header img {
-    height: 50px;
-}
-
-footer {
-    padding: 15px;
-    background-image: linear-gradient(
-        to top,
-        rgba(2, 2, 39, .80),
-        rgba(88, 220, 240, 0.464));
-    margin-top: 2000px;
-}
-
-main {
-    height: 100%;
-    flex: 1;
-    background-image: url("img/comicbook_background.png");
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 24px;
-}
-
-nav a:hover {
-    color: #cd1d92;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav a:first-of-type {
-    flex: 1;
-    margin-left: 0;
-}
-
-.credentials-container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 180px ;
-}
-
-.credentials-container input {
-    width: 100%;
-    margin: 10px 0;
-    padding: 6px 12px; 
-}
-
-.credentials-container input[type="submit"] {
-    cursor: pointer;
-}
-
-.slider {
-    width: 100%;
-    height: 265px;
-    /* position: relative; */
-    display: flex;
-    overflow-x: scroll;
-    gap: 10px;
-    margin-top: 10px;
-}
-  
-.slider img {
-    width: 100%;
-    height: 250px;
-    top: 0;
-    left: 0;
-}
-  
-.slider img:first-child {
-    z-index: 1;
-}
-
-.slider img:nth-child(2) {
-    z-index: 0;
-}
-
-nav img {
-   height: 50px;
-}
-.search-icon {
-    text-align: center;
-}
-
-footer img {
-    height: 50px;
-}
-
-.search-container {
-    width: 100%;
-    max-width: 700px;
-    padding: 100px;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-input {
-    padding: 5px;
-    padding-bottom: 2px;
-    line-height: 2;
-    border: none;
-    font-size: 1.2rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #323232;
-    border-bottom: 1px solid rgba(0,0,0,0.5);
-    outline: none;
-}
-
-.input-container {
-    justify-content: center;
-}
-
-.button {
+.button, .comic-page-btn, .character-page-btn{
     padding: 15px;
     border-radius: 50px;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -149,9 +31,80 @@ input {
     cursor: pointer;
 }
 
-.display-container {
-    margin-top: 2em;
-    padding: 1em;
+.btn-close {
+    transform: translate(370px, 5px);
+    padding: 0.5rem 0.7rem;
+    background: #eee;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.comicTitle {
+    margin-top: 20px;
+}
+
+.comic-name{
+    max-width: 200px;
+}
+
+.comic-name, .comic-page-name {
+    padding: 0.5em 0 0.8em 0;
+    color: grey;
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 600;
+}
+
+.comic-page-name {
+    max-width: 120px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.comic-container {
+    text-align: center;
+}
+
+.comic-container img {
+    padding: 0.5em;
+    height: 11em;
+    width: auto;
+    cursor: pointer;
+}
+
+.comic-page-input-container, .character-input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 20px;
+}
+
+.comics-page-feature {
+    width: 100%;
+    max-width: 800px;
+    padding-top: 20px;
+    padding: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.character-description, .character-specifics {
+    text-align: justify;
+    color: grey;
+    line-height: 2em;
+    font-weight: 300;
+}
+
+.comic-page-img-container img {
+    height: 11em;
+    gap: 10px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.character-specifics {
+    margin-top: 10px;
+    font-weight: 600;
 }
 
 .container-character-img {
@@ -180,94 +133,59 @@ input {
     font-weight: 600;
 }
 
-.thor-feature-title {
-    font-size: 1em;
-    text-align: left;
-}
-
-.comicTitle {
-    margin-top: 20px;
-}
-
-.comic-name{
-    max-width: 200px;
-}
-
-.comic-name, .comic-page-name {
-    padding: 0.5em 0 0.8em 0;
-    color: grey;
-    text-transform: uppercase;
-    font-size: .7em;
-    font-weight: 600;
-}
-
-.comic-page-name {
-    max-width: 120px;
-    justify-content: center;
-    padding: 10px;
-}
-
-.character-description, .character-specifics {
-    text-align: justify;
-    color: grey;
-    line-height: 2em;
-    font-weight: 300;
-}
-
-.thor-description-container div {
+.credentials-container {
     display: flex;
-    text-align: justify;
-    color: grey;
-    line-height: 1.5em;
-    font-weight: 300; 
+    flex-direction: column;
+    margin: 0 auto;
+    width: 180px ;
 }
 
-.thor-description-container {
-    padding-top: 35px;
+.credentials-container input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 6px 12px; 
 }
 
-.character-specifics {
-    margin-top: 10px;
-    font-weight: 600;
-}
-
-.show-comics {
-    display: flex;
-    padding: 1em;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.comic-container {
-    text-align: center;
-}
-
-.comic-container img {
-    padding: 0.5em;
-    height: 11em;
-    width: auto;
+.credentials-container input[type="submit"] {
     cursor: pointer;
 }
 
-.list {
-    width: 90%;
-    color: grey;
+.display-container {
+    margin-top: 2em;
+    padding: 1em;
+}
+
+.features-container {
     display: flex;
-    flex-direction: column;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.1rem;
-    line-height: 1.5rem;
-    z-index: 1;
-    margin-top: 6px;
+    margin-top: 20px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
-.autocompelete-items {
-    padding: .5em;
+footer {
+    padding: 15px;
+    background-image: linear-gradient(
+        to top,
+        rgba(2, 2, 39, .80),
+        rgba(88, 220, 240, 0.464));
+    margin-top: 2000px;
 }
 
-.autocompelete-items:hover {
-    color: #323232;
+footer img {
+    height: 50px;
+}
+
+header {
+    padding: 18px;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(2, 2, 39, .80),
+        rgba(88, 220, 240, 0.464)), url("img/buildings.png");
+}
+
+header img {
+    height: 50px;
 }
 
 .hero-img-container-comics {
@@ -298,53 +216,46 @@ input {
     text-transform: uppercase;
 }
 
-.features-container {
-    display: flex;
-    margin-top: 20px;
-    gap: 10px;
+.hidden {
+    display: none;
+}
+
+h3 {
+    padding: 0;
+}
+
+input {
+    padding: 5px;
+    padding-bottom: 2px;
+    line-height: 2;
+    border: none;
+    font-size: 1.2rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #323232;
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    outline: none;
+}
+
+.input-container {
     justify-content: center;
-    align-items: center;
 }
 
-#search-icon {
-    max-height: 5vh;
-}
-
-.comics-page-feature {
-    width: 100%;
-    max-width: 800px;
-    padding-top: 20px;
-    padding: 100px;
-    margin: 0 auto;
-    margin-top: 10px;
-}
-
-.thor-feature {
+.list {
+    width: 90%;
+    color: grey;
     display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    margin-top: 50px;
+    flex-direction: column;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    z-index: 1;
+    margin-top: 6px;
 }
 
-.thor-stats {
-    margin-top: 15px;
-}
-.comic-page-img-container img {
-    height: 11em;
-    gap: 10px;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.thorImg-comics-page {
-    height: 14em;
-    border-radius: 50%;
-    text-align: right;
-    margin: 20px;
-}
-
-.thor-character-feature {
-    display: flex;
+main {
+    height: 100%;
+    flex: 2;
+    background-image: url("img/comicbook_background.png");
 }
 
 .modal-section {
@@ -369,31 +280,6 @@ input {
     justify-content: space-between;
 }
 
-.btn-close {
-    transform: translate(370px, 5px);
-    padding: 0.5rem 0.7rem;
-    background: #eee;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-    z-index: 1;
-}
-
-  /* .hidden {
-    display: none;
-  } */
-
 .modal-content {
     display: flex;
 }
@@ -417,17 +303,6 @@ input {
     font-size: 1.2em;
     font-weight: 600;
     margin-left: 10px;
-}
-
-h3 {
-    padding: 0;
-}
-
-p {
-    margin-top: 0;
-    padding: 0;
-    margin-left: 10px;
-    margin-bottom: 10px;
 }
 
 .modal-publish-info {
@@ -456,6 +331,140 @@ p {
 
 .modal-price-info p {
     margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 24px;
+}
+
+nav a:hover {
+    color: #cd1d92;
+}
+
+nav a:first-of-type {
+    flex: 1;
+    margin-left: 0;
+}
+
+nav img {
+   height: 50px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+p {
+    margin-top: 0;
+    padding: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.search-icon {
+    text-align: center;
+}
+
+#search-icon {
+    max-height: 5vh;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 700px;
+    padding: 100px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.show-comics {
+    display: flex;
+    padding: 1em;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.slider {
+    width: 100%;
+    height: 265px;
+    /* position: relative; */
+    display: flex;
+    overflow-x: scroll;
+    gap: 10px;
+    margin-top: 10px;
+}
+  
+.slider img {
+    width: 100%;
+    height: 250px;
+    top: 0;
+    left: 0;
+}
+  
+.slider img:first-child {
+    z-index: 1;
+}
+
+.slider img:nth-child(2) {
+    z-index: 0;
+}
+
+.thor-feature-title {
+    font-size: 1em;
+    text-align: left;
+}
+
+.thor-description-container div {
+    display: flex;
+    text-align: justify;
+    color: grey;
+    line-height: 1.5em;
+    font-weight: 300; 
+}
+
+.thor-description-container {
+    padding-top: 35px;
+}
+
+.thor-feature {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.thor-stats {
+    margin-top: 15px;
+}
+
+.thorImg-comics-page {
+    height: 14em;
+    border-radius: 50%;
+    text-align: right;
+    margin: 20px;
+}
+
+.thor-character-feature {
+    display: flex;
 }
 
 @media (max-width: 60em) {
