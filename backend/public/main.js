@@ -333,45 +333,48 @@ async function comicModal(jsonData) {
 
   const comicTitle = document.createElement('div')
   comicTitle.className = "modal-description"
-  comicTitle.innerHTML = jsonData.data.results[0].title
-  div1.append(comicTitle)
+  comicTitle.innerHTML = `<p> ${jsonData.data.results[0].title} </p>`
+  comicContainer.append(comicTitle)
+  
 
   const div2 = document.createElement('div')
+  div2.className = 'modal-publish-info'
   const h3 = document.createElement('h3')
   const publishedDate = moment(jsonData.data.results[0].dates[0].date).format("LL")
   h3.textContent = "Published:"
   div2.append(h3)
   div2.append(publishedDate)
-  div1.append(div2)
+  comicContainer.append(div2)
 
   const div3 = document.createElement('div')
   const writerdiv = document.createElement('div')
   const writerTitle = document.createElement('h3')
   writerTitle.textContent = "Writer:"
-  writerdiv.innerHTML = jsonData.data.results[0].creators.items.find((creator) => creator.role === 'writer').name
+  writerdiv.innerHTML = ` <p> ${jsonData.data.results[0].creators.items.find((creator) => creator.role === 'writer').name} </p>`
   div3.append(writerTitle)
   div3.append(writerdiv)
-  div1.append(div3)
+  comicContainer.append(div3)
 
   const div4 = document.createElement('div')
   const artistDiv = document.createElement('div')
   const artistTitle = document.createElement('h3')
   artistTitle.textContent = "Cover Artist:"
-  artistDiv.innerHTML = jsonData.data.results[0].creators.items.find((creator) => creator.role === "colorist (cover)").name
+  artistDiv.innerHTML = ` <p> ${jsonData.data.results[0].creators.items.find((creator) => creator.role === "colorist (cover)").name} </p>`
   div4.append(artistTitle)
   div4.append(artistDiv)
-  div1.append(div4)
+  comicContainer.append(div4)
 
   const div5 = document.createElement('div')
   const descriptionDiv = document.createElement('div')
   const descriptionTitle = document.createElement('h3')
   descriptionTitle.textContent = "Description:"
-  descriptionDiv.innerHTML = jsonData.data.results[0].description
+  descriptionDiv.innerHTML = `<p> ${jsonData.data.results[0].description} </p>`
   div5.append(descriptionTitle)
   div5.append(descriptionDiv)
-  div1.append(div5)
+  comicContainer.append(div5)
 
   const div6 = document.createElement('div')
+  div6.className = 'modal-price-info'
   const priceDiv = document.createElement('div')
   const priceTitle = document.createElement('h3')
   const buyNowButton = document.createElement('button')
@@ -379,11 +382,11 @@ async function comicModal(jsonData) {
   buyNowButton.className = 'modal-buy-now-button'
   buyNowButton.id = 'modal-buy-now-button'
   priceTitle.textContent = "Price:"
-  priceDiv.innerHTML = `$${jsonData.data.results[0].prices[0].price}`
+  priceDiv.innerHTML = `<p> $${jsonData.data.results[0].prices[0].price} </p>`
   div6.append(priceTitle)
   div6.append(priceDiv)
   div6.append(buyNowButton)
-  div1.append(div6)  
+  comicContainer.append(div6)  
 
 } 
 

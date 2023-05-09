@@ -370,10 +370,11 @@ input {
 }
 
 .btn-close {
-    transform: translate(10px, -20px);
+    transform: translate(370px, 5px);
     padding: 0.5rem 0.7rem;
     background: #eee;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .overlay {
@@ -387,11 +388,75 @@ input {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(3px);
     z-index: 1;
-  }
+}
 
-  .hidden {
+  /* .hidden {
     display: none;
-  }
+  } */
+
+.modal-content {
+    display: flex;
+}
+
+.modal-image {
+    display: flex;
+    height: 14em;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+.modal-description p {
+    margin: 0;
+    padding: 0;
+}
+
+.modal-description, h3 {
+    padding: 0.5em 0 0.8em 0;
+    color: #323232;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+h3 {
+    padding: 0;
+}
+
+p {
+    margin-top: 0;
+    padding: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-publish-info {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-publish-info h3 {
+    margin-left: 0;
+}
+
+.modal-price-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal-buy-now-button {
+    padding: 10px;
+    border: none;
+    font: 1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.modal-price-info p {
+    margin: 0;
+}
 
 @media (max-width: 60em) {
     .comic-name {
