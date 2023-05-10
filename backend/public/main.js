@@ -22,6 +22,7 @@ const trendingComics = document.getElementById('trending-comics')
 
 //characher endpoint global values
 const spotlightCharacters = document.getElementById('spotlight-character');
+const spotlightCharactersTitle = document.getElementById('spotlight-character-title');
 
 //api keys and private info -- need to put this is a config file
 const publicKey = '9c2c83f57023818abe5c3258493fb406';
@@ -31,6 +32,7 @@ const hashValue = '2db36f8a451b0bbf1883bccc24d901af';
 
 let date = new Date();
 let characterIdValue = "";
+let fetchCharactersArray = ["thor", "iron man", "hulk", "Spider-man (Peter Parker)", "She-Hulk (Jennifer Walters)", "captain america", "Spider-Man (Miles Morales)", "THANOS"];
 
 if(window.location.pathname === '/login') {
   const form = document.getElementById('form');
@@ -775,20 +777,32 @@ async function renderComics(jsonData) {
 }
 
 async function fetchCharcters() {
+  
+  const fetchedData = fetchCharactersArray.map( async (character, index) => {
+    const url = `https://gateway.marvel.com:443/v1/public/characters?name=${character}&apikey=${publicKey}&ts=${timeStamp}&hash=${hashValue}`
+    const response = await fetch(url);
+    const jsonData = await response.json();
+    console.log(jsonData)
 
-  let charactername = "thor"
-  const url = `https://gateway.marvel.com:443/v1/public/characters?name=${charactername}&apikey=${publicKey}&ts=${timeStamp}&hash=${hashValue}`
-  const response = await fetch(url);
-  const jsonData = await response.json();
-  console.log(jsonData)
-
-  featuredCharacterPage(jsonData)
+    return jsonData
+  }) 
+  
+  Promise.all(fetchedData).then((values) => { 
+    console.log(values)
+    trendingPopularCharacterTitle()
+    featuredCharacterPage(values) })
 
 }
 
-async function featuredCharacterPage(jsonData) {
+function trendingPopularCharacterTitle() {
+  const trendingCharacters = document.createElement('div')
+  trendingCharacters.textContent = "Trending in the Universe"
+  spotlightCharactersTitle.append(trendingCharacters)
+}
 
-  for(let i = 0; i < 5; i++ ) {
+async function featuredCharacterPage(values) {
+
+  for(let i = 0; i < 8; i++ ) {
   const div = document.createElement('div')
   div.className = 'features-container'
   spotlightCharacters.append(div)
@@ -810,8 +824,8 @@ async function featuredCharacterPage(jsonData) {
   div3.append(div4)
 
   const img = document.createElement('img')
-  const imgPath = jsonData.data.results[0].thumbnail['path']
-  const extension = jsonData.data.results[0].thumbnail['extension']
+  const imgPath = values[i].data.results[0].thumbnail['path']
+  const extension = values[i].data.results[0].thumbnail['extension']
   img.src = imgPath + "." + extension
   img.className = 'popular-characters-img'
   div4.append(img)
@@ -822,12 +836,12 @@ async function featuredCharacterPage(jsonData) {
 
   const h2 = document.createElement('h2')
   h2.className = 'character-page-name'
-  h2.innerHTML = `${jsonData.data.results[0].name}`
+  h2.innerHTML = `${values[i].data.results[0].name}`
   div5.append(h2)
 
   const p = document.createElement('p')
   p.className = 'character-page-description'
-  p.innerHTML = `${jsonData.data.results[0].description}`
+  p.innerHTML = `${values[i].data.results[0].description}`
   div5.append(p)
 
 }}

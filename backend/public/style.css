@@ -105,6 +105,7 @@ body {
     justify-content: center;
     margin-top: 30px;
 }
+
 .comic-page-character-description {
     text-align: justify;
     color: grey;
@@ -118,6 +119,23 @@ body {
     color: grey;
     line-height: 2em;
     font-weight: 300;
+}
+
+.character-page-name {
+    padding: 0.5em 0 0.8em 0;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 5px;
+}
+
+.character-page-description {
+    color: white;
+    line-height: 1.2em;
+    font-weight: 300;
+    margin: 10px;
 }
 
 .comic-page-img-container img {
@@ -229,7 +247,7 @@ body {
 
 .flip-card {
     background-color: transparent;
-    width: 300px;
+    width: 200px;
     height: 200px;
     border: 1px solid #f1f1f1;
 }
@@ -263,6 +281,8 @@ body {
 .flip-card-back {
     background-color: #323232;
     color: white;
+    overflow: scroll;
+    
     transform: rotateY(180deg);
 }
 
@@ -271,12 +291,21 @@ body {
 }
 
 footer {
+    /* position: absolute;
+    bottom: 0;
+    width: 100%; */
     padding: 15px;
     background-image: linear-gradient(
         to top,
         rgba(2, 2, 39, .80),
         rgba(88, 220, 240, 0.464));
-    margin-top: 2000px;
+    margin-top: 1000px; 
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+
 }
 
 footer img {
@@ -360,9 +389,11 @@ input {
 }
 
 main {
-    height: 100%;
-    flex: 2;
-    background-image: url("img/comicbook_background.png");
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    flex: 1 0 auto;
+    /* background-image: url("img/comicbook_background.png"); */
 }
 
 .modal-section {
@@ -550,6 +581,16 @@ p {
     margin: 20px 20px 0 20px;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.trending-characters-title {
+    padding: 0.5em 0 0.8em 0;
+    text-align: center;
+    color: #323232;
+    text-transform: uppercase;
+    font-size: 2em;
+    font-weight: 600;
+    margin-top: 5%;
 }
 
 .thor-feature-title {
