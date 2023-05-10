@@ -338,8 +338,6 @@ async function renderTrendingComics(data) {
   }
 }
 
-fetchArrayOfComics()
-
 async function renderResults(jsonData) {
   const div = document.createElement('div')
   div.className = 'comic-page-results-container'
@@ -382,7 +380,7 @@ async function getComics() {
 async function renderComics(jsonData) {
  
 
-  for(let i = 0; i < 10; i ++) {
+  for(let i = 1; i < 10; i ++) {
     const div = document.createElement('div')
     div.className = "comic-page-comic-container"
     div.id = "comic-container"
@@ -572,7 +570,7 @@ async function renderComicsFeaturePage(jsonData) {
   }
 }
 
-async function comicModal(jsonData) {
+async function comicModal() {
   const sectionModal = document.createElement('section');
   sectionModal.className = "modal-section hidden"
   sectionModal.id = "modal-section"
@@ -658,6 +656,7 @@ function openModal() {
   overlay.classList.remove("hidden");
 }
 
+fetchArrayOfComics()
 getComicsPage();
 comicPageFeatureCharacter();
 }
@@ -775,7 +774,19 @@ async function renderComics(jsonData) {
   }
 }
 
-async function featuredCharacterPage() {
+async function fetchCharcters() {
+
+  let charactername = "thor"
+  const url = `https://gateway.marvel.com:443/v1/public/characters?name=${charactername}&apikey=${publicKey}&ts=${timeStamp}&hash=${hashValue}`
+  const response = await fetch(url);
+  const jsonData = await response.json();
+  console.log(jsonData)
+
+  featuredCharacterPage(jsonData)
+
+}
+
+async function featuredCharacterPage(jsonData) {
 
   for(let i = 0; i < 5; i++ ) {
   const div = document.createElement('div')
@@ -799,45 +810,38 @@ async function featuredCharacterPage() {
   div3.append(div4)
 
   const img = document.createElement('img')
-  img.src = ''
+  const imgPath = jsonData.data.results[0].thumbnail['path']
+  const extension = jsonData.data.results[0].thumbnail['extension']
+  img.src = imgPath + "." + extension
+  img.className = 'popular-characters-img'
   div4.append(img)
 
   const div5 = document.createElement('div')
   div5.className = 'flip-card-back'
   div3.append(div5)
 
-  const h1 = document.createElement('h1')
-  h1.className = 'character-page-name'
-  div5.append(h1)
+  const h2 = document.createElement('h2')
+  h2.className = 'character-page-name'
+  h2.innerHTML = `${jsonData.data.results[0].name}`
+  div5.append(h2)
 
   const p = document.createElement('p')
   p.className = 'character-page-description'
+  p.innerHTML = `${jsonData.data.results[0].description}`
   div5.append(p)
 
 }}
 
-featuredCharacterPage();
+fetchCharcters() 
 
 }
 
 async function landingCharacters(value) {
   featureCharacters.innerHTML = ""
-  value === spiderman;
+  value === spider-man;
   const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}&name=${value}`
   
   const response = await fetch(url);
   const jsonData = await response.json();
   console.log(jsonData);
-
-  jsonData.data['results'].forEach((element) => {
-    featureCharacters.innerHTML = `
-      <div class="landing-character-img">
-        <img src = "${element.thumbnail['path']}.${element.thumbnail['extension']}" /> 
-      </div>
-      `
-  })
 }
-
-// window.onload = () => {
-//   landingCharacters();
-// }
