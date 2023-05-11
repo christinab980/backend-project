@@ -120,6 +120,16 @@ body {
     line-height: 2em;
     font-weight: 300;
 }
+.character-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.charcter-page-display-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .character-page-name {
     padding: 0.5em 0 0.8em 0;
@@ -210,7 +220,9 @@ body {
 }
 
 .comic-list{
-    margin-right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .credentials-container {
@@ -299,7 +311,7 @@ footer {
         to top,
         rgba(2, 2, 39, .80),
         rgba(88, 220, 240, 0.464));
-    margin-top: 1000px; 
+    margin-top: 2000px; 
 }
 
 #page-container {
