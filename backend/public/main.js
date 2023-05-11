@@ -12,6 +12,9 @@ const characterPageInput = document.getElementById('character-page-input');
 //landing or home endpoint global values
 const featureCharacters = document.getElementById("feature-characters");
 const landingComics = document.getElementById("popular-comics");
+const featureCharactersTitle = document.getElementById("featuredCharacterTitle");
+const imgComicInsert = document.getElementById('imgComicInsert');
+const landingPageModal = document.getElementById('landing-page-modal');
 
 //comic endpoint global values
 const comicPageFeature = document.getElementById('comics-page-feature');
@@ -29,7 +32,6 @@ const characterList = document.getElementById('character-page-list')
 const comicResults = document.getElementById('character-page-show-comics');
 const characterModal = document.getElementById('character-page-modal');
 
-
 //api keys and private info -- need to put this is a config file
 const publicKey = '9c2c83f57023818abe5c3258493fb406';
 const privateKey = 'bd3e13633fefcb16b1f1d283c66344f1dbddc5ef';
@@ -38,6 +40,7 @@ const hashValue = '2db36f8a451b0bbf1883bccc24d901af';
 
 let date = new Date();
 let characterIdValue = "";
+let fetchCharactersforLandingPlace = ["falcon", "daredevil", "thor (goddess of thunder)", "adam warlock", "hulk"];
 let fetchCharactersArray = ["thor", "iron man", "hulk", "Spider-man (Peter Parker)", "She-Hulk (Jennifer Walters)", "captain america", "Spider-Man (Miles Morales)", "THANOS"];
 
 if(window.location.pathname === '/login') {
@@ -996,13 +999,145 @@ fetchCharcters()
 
 }
 
+if(window.location.pathname === '/') {
 
-async function landingCharacters(value) {
-  featureCharacters.innerHTML = ""
-  value === spider-man;
-  const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}&name=${value}`
+
+  async function fetchCharctersforLandingPlace() {
   
+    const fetchedData = fetchCharactersforLandingPlace.map( async (character, index) => {
+      const url = `https://gateway.marvel.com:443/v1/public/characters?name=${character}&apikey=${publicKey}&ts=${timeStamp}&hash=${hashValue}`
+      const response = await fetch(url);
+      const jsonData = await response.json();
+  
+      return jsonData
+    }) 
+    
+    Promise.all(fetchedData).then((values) => { 
+      featuredLandingPage(values) })
+  
+  }
+
+async function featuredLandingPage(values) {
+
+  for(let i = 0; i < 5; i++ ) {
+  const div = document.createElement('div')
+  div.className = 'features-container'
+  featureCharacters.append(div)
+
+  const div1 = document.createElement('div')
+  div1.className = 'character-page-feature'
+  div.append(div1)
+
+  const div2 = document.createElement('div')
+  div2.className = 'flip-card'
+  div1.append(div2)
+
+  const div3 = document.createElement('div')
+  div3.className ='flip-card-inner'
+  div2.append(div3)
+
+  const div4 = document.createElement('div')
+  div4.className = 'flip-card-front'
+  div3.append(div4)
+
+  const img = document.createElement('img')
+  const imgPath = values[i].data.results[0].thumbnail['path']
+  const extension = values[i].data.results[0].thumbnail['extension']
+  img.src = imgPath + "." + extension
+  img.className = 'popular-characters-img'
+  div4.append(img)
+
+  const div5 = document.createElement('div')
+  div5.className = 'flip-card-back'
+  div3.append(div5)
+
+  const h2 = document.createElement('h2')
+  h2.className = 'character-page-name'
+  h2.innerHTML = `${values[i].data.results[0].name}`
+  div5.append(h2)
+
+  const p = document.createElement('p')
+  p.className = 'character-page-description'
+  p.innerHTML = `${values[i].data.results[0].description}`
+  div5.append(p)
+
+}}
+
+async function fetchDaredevilComics() {
+  const url = `https://gateway.marvel.com:443/v1/public/comics?characters=1009262&apikey=${publicKey}&ts=${timeStamp}&hash=${hashValue}`
   const response = await fetch(url);
-  const jsonData = await response.json();
-  console.log(jsonData);
+  const data = await response.json();
+  console.log(data)
+
+   renderLandingComics(data)
+}
+
+async function renderLandingComics(data) {
+  const div = document.createElement('div')
+  div.className = "landingPage-comics-container"
+  landingComics.append(div)
+
+  const divContent = document.createElement('div')
+  divContent.className = 'landing-comics-container'
+  div.append(divContent)
+
+  for(let i = 1; i < 10; i++) {
+
+    const divContainer = document.createElement('div')
+    divContainer.className = "trending-comic-img-container"
+    divContent.append(divContainer)
+
+    const img = document.createElement('img')
+    const imgPath = data.data.results[i].thumbnail['path']
+    const extension = data.data.results[i].thumbnail['extension']
+    img.src = imgPath + "." + extension
+    const comicId = data.data.results[i].id
+    img.id = `treding-comic-img-${comicId}`
+    divContainer.append(img)
+
+    const div2 = document.createElement('div')
+    div2.className = "trending-comics-name"
+    div2.innerHTML = `${data.data.results[i].title}`
+    divContainer.append(div2)
+
+    function renderComic() {
+      const renderedComicName = document.getElementById('modal-name')
+      renderedComicName.innerHTML = `${data.data.results[i].title}`
+
+      const renderedComicImg = document.getElementById('modal-img')
+      renderedComicImg.src = `${imgPath + "." + extension}`
+
+      const renderedComicPublishDate = document.getElementById('modal-publish-info')
+      renderedComicPublishDate.innerHTML = `<h3> Published: </h3> ${moment(data.data.results[i].dates[0].date).format("LL")}`
+
+      const modalWriter = document.getElementById('modal-writer')
+      modalWriter.innerHTML = `<h3> Writer: </h3> <p> ${data.data.results[i].creators.items.find((creator) => creator.role === 'writer').name} </p> `
+      
+      const modalCoverArtist = document.getElementById('modal-cover-artist')
+      modalCoverArtist.innerHTML = `<h3> Cover Artist: </h3> <p> ${(data.data.results[i].creators.items.find((creator) => creator.role === "colorist (cover)") !== undefined) ? data.data.results[i].creators.items.find((creator) => creator.role === "colorist (cover)").name : data.data.results[i].creators.items.find((creator) => creator.role === "penciller (cover)").name}</p>`
+      
+      const modalDescription = document.getElementById('modal-description')
+      modalDescription.innerHTML = `<h3> Description: </h3> <p> ${data.data.results[i].description} </p>`
+
+      const modalPriceInfo = document.getElementById('modal-price-info')
+      modalPriceInfo.innerHTML = `<h3> Price: </h3> <p> $${data.data.results[i].prices[0].price} </p>`
+
+      const button1 = document.getElementById('modal-buy-now-button')
+      console.log(button1)
+      button1.innerHTML = `<a href= ${data.data.results[i].urls[1].url} target="_blank"> Buy Now </a>`
+    }
+      const characterBookBtn = document.getElementById(`treding-comic-img-${comicId}`);
+      
+      characterBookBtn.addEventListener('click', () => {
+      renderComic();
+      openModal();
+    })
+  }
+}
+fetchDaredevilComics()
+fetchCharctersforLandingPlace()
+
+
+
+
 }
