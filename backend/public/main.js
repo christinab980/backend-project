@@ -739,27 +739,17 @@ async function getResults() {
   return _characterId 
 };
 
-// async function milesfetch() {
-//   if (characterPageInput.value.trim().length < 1) {
-//     alert("Input cannot be blank")
-//   }
-//   characterResults.innerHTML = ""
-//   const url = `https://gateway.marvel.com:443/v1/public/character=ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
+milesfetch()
+
+async function milesfetch() {
+  _characterId = "1016181"
+  const url = `https://gateway.marvel.com:443/v1/public/characters/1016181?ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
   
-//   const response = await fetch(url);
-//   const jsonData = await response.json();
-//   console.log(jsonData)
+  const response = await fetch(url);
+  const data = await response.json();
 
-//   let _characterId = ""; 
-
-//   jsonData.data['results'].forEach((element) => { 
-//     _characterId = element.id 
-//     console.log(_characterId)
-//   })
-
-//   renderCharacterResults(jsonData)
-//   return _characterId 
-// }
+  milesInfoResults(data)
+}
 
 async function milesInfoResults(data) {
   const div = document.createElement('div')
@@ -771,7 +761,12 @@ async function milesInfoResults(data) {
   div.innerHTML = `${data.data.results[0].description}`
   div.append(div2)
 
+  const div3 = document.createElement('div')
+  div3.className = 'miles-stats'
+  div3.innerHTML =`Comic: ${data.data.results[0].comics.available} | Series: ${data.data.results[0].series.available} | Stories: ${data.data.results[0].stories.available} | Events: ${data.data.results[0].events.available}`
+  div.append(div3)
 }
+
 async function renderCharacterResults(jsonData) {
     const div = document.createElement('div')
     div.className = 'comic-page-results-container'
@@ -810,7 +805,7 @@ async function getComics() {
   const url = `https://gateway.marvel.com:443/v1/public/comics?characters=${characterIdValue}&ts=${timeStamp}&apikey=${publicKey}&hash=${hashValue}`
   const response = await fetch(url);
   const jsonData = await response.json();
-
+  console.log(jsonData)
 renderComics(jsonData);
 } 
 comicModal()
@@ -1000,6 +995,10 @@ async function comicModal() {
   const div4 = document.createElement('div')
   div4.id = 'modal-cover-artist'
   comicContainer.append(div4)
+
+  const characterDiv = document.createElement('div')
+  characterDiv.id = 'modal-characters'
+  comicContainer.append(characterDiv)
 
   const div5 = document.createElement('div')
   div5.id ="modal-description"
