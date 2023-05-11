@@ -17,11 +17,6 @@ body, html {
     font-family: sans-serif;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 .button, .comic-page-btn, .character-page-btn{
     padding: 15px;
     border-radius: 50px;
@@ -311,13 +306,13 @@ footer {
         to top,
         rgba(2, 2, 39, .80),
         rgba(88, 220, 240, 0.464));
-    margin-top: 2000px; 
 }
 
 #page-container {
     position: relative;
     min-height: 100vh;
-
+    display: flex;
+    flex-direction: column;
 }
 
 footer img {
@@ -402,9 +397,7 @@ input {
 
 main {
     position: relative;
-    min-height: 100vh;
-    height: 100vh;
-    flex: 1 0 auto;
+    flex: 1;
     /* background-image: url("img/comicbook_background.png"); */
 }
 
