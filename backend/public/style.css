@@ -670,8 +670,57 @@ p {
 }
 
 @media (max-width: 60em) {
+    
+    .btn-close {
+        transform: translate(400px, 5px);
+        padding: 0.5rem 0.7rem;
+        background: #eee;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .character-specifics {
+        text-align: center;
+    }
+
+    .comic-page-container {
+        gap: 10px;
+    }
+
+    .comic-page-img-container img {
+        justify-content: center;
+        margin: 10px;
+        margin-bottom: 0;
+        height: 16em;
+    }
+
+    .comic-page-name {
+        max-width: 200px;
+        text-align:  center;
+    }
+
     .comic-name {
         max-width: 300px;
+    }
+
+    .container-comic-img img {
+        height: 17em;
+    }
+
+    .comic-page-results-container {
+        flex-direction: column;
+    }
+
+    .comic-page-character-img {
+        height: 15em;
+    }
+
+    .comic-page-character-name {
+        text-align: center;
+    }
+
+    .display-container {
+        flex-direction: column;
     }
 
     .search-container {
@@ -684,4 +733,58 @@ p {
         display: flex;
     }
 
+    .modal-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        width: 480px;
+        padding: 1.3rem;
+        min-height: 250px;
+        position: absolute;
+        top: 230%;
+        left: 9%;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        z-index: 2;
+    }
+
+    .show-comics {
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+
+    .trending-container {
+        flex-wrap: wrap;
+    }
+
+    .thor-feature-title {
+        text-align: center;
+    }
+
+    .thor-character-feature {
+        flex-direction: column;
+    }
+
+    .thor-img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .thor-description {
+        padding: 0;
+    }
+
+    .thor-stats {
+        justify-content: center;
+    }
+
+    .thor-img-container img {
+        height: 17em;
+    }
+
+    footer {
+        margin-top: 3000px;
+    }
 }
