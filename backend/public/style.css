@@ -54,7 +54,11 @@ body, html {
     font-weight: 600;
 }
 
-.comic-inserttext, .landingInsert-Text {
+.character-page-insert-text {
+    margin-top: 20px;
+}
+
+.comic-inserttext, .landingInsert-Text, .charcter-page-insert-text {
     color: white;
     text-transform: uppercase;
 }
@@ -393,6 +397,12 @@ input {
     margin-top: 5%;
     padding: 8em;
     background-image: url("img/daredevil-comic-insert.png");
+}
+
+.imgCharaterInsert {
+    margin-top: 5%;
+    padding: 8em;
+    background-image: url("img/miles-Morales.png");
 }
 
 .landing-caption-comics {
@@ -794,7 +804,7 @@ p {
         padding: 1.3rem;
         min-height: 250px;
         position: absolute;
-        top: 230%;
+        top: 50%;
         left: 9%;
         background-color: white;
         border: 1px solid #ddd;
