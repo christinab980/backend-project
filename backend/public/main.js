@@ -182,7 +182,7 @@ async function renderComics(jsonData) {
   comicTitle.textContent = 'Comics'
   divTitle.append(comicTitle)
 
-  for(let i = 0; i < 3; i ++) {
+  for(let i = 1; i < 5; i ++) {
     const div = document.createElement('div')
     div.className = "comic-container"
     div.id = "comic-container"
@@ -1134,6 +1134,76 @@ async function renderLandingComics(data) {
     })
   }
 }
+
+async function comicModal() {
+  const sectionModal = document.createElement('section');
+  sectionModal.className = "modal-section hidden"
+  sectionModal.id = "modal-section"
+  landingPageModal.append(sectionModal)
+
+  const div = document.createElement('div')
+  div.className = 'flex'
+  sectionModal.append(div)
+
+  const closeButton = document.createElement('button')
+  closeButton.id = 'btn-close'
+  closeButton.className = 'btn-close'
+  closeButton.textContent = 'x'
+  closeButton.addEventListener('click', () => {
+    closeModal()
+  })
+  div.append(closeButton)
+
+  const div1 = document.createElement('div')
+  div1.className = 'modal-content'
+  sectionModal.append(div1)
+
+  const imgContainer = document.createElement('div')
+  imgContainer.className = 'modal-img-container'
+  div1.append(imgContainer)
+
+  const comicImg = document.createElement('img')
+  comicImg.className = "modal-image"
+  comicImg.id = "modal-img"
+  imgContainer.append(comicImg)
+
+  const comicContainer = document.createElement('div')
+  comicContainer.className = "modal-description-container"
+  div1.append(comicContainer)
+
+  const comicTitle = document.createElement('div')
+  comicTitle.id = "modal-name"
+  comicTitle.className = "modal-description"
+  comicContainer.append(comicTitle)
+
+  const div2 = document.createElement('div')
+  div2.id = "modal-publish-info"
+  div2.className = 'modal-publish-info'
+  comicContainer.append(div2)
+
+  const div3 = document.createElement('div')
+  div3.id = 'modal-writer'
+  comicContainer.append(div3)
+
+  const div4 = document.createElement('div')
+  div4.id = 'modal-cover-artist'
+  comicContainer.append(div4)
+
+  const div5 = document.createElement('div')
+  div5.id ="modal-description"
+  comicContainer.append(div5)
+
+  const div6 = document.createElement('div')
+  div6.id = "modal-price-info"
+  div6.className = 'modal-price-info'
+  comicContainer.append(div6)  
+
+  const buyNowButton = document.createElement('button')
+  buyNowButton.id = 'modal-buy-now-button'
+  buyNowButton.className = 'modal-buy-now-button'
+  comicContainer.append(buyNowButton)
+ 
+} 
 fetchDaredevilComics()
 fetchCharctersforLandingPlace()
 
