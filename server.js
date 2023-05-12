@@ -13,12 +13,12 @@
 // Create a registration route (POST route)
 // Go to handlesubmit function in draft and change it to a FETCH call
 
-// const express = require('express');
+const express = require('express');
 const pgp = require('pg-promise')();
 
 const bodyParser = require('body-parser')
 
-// const server = express();
+const server = express();
 const bcrypt = require('bcrypt')
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
@@ -62,6 +62,7 @@ server.post('/login', async(req, res) => {
 
 server.post('/register', async(req,res) => {
     const {username, password, gender} = req.body
+    console.log(password)
     const saltRounds = 10
     const hash = await bcrypt.hash(password, saltRounds)
     console.log('hashedPassword', hash)

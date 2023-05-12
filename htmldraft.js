@@ -34,16 +34,37 @@
 //     return JSON.stringify(data, null, 4);
 // };
   
+
 const handleSubmit = (e) => {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    console.log('Username: '+username, 'Password: '+password);
-    // return (username, password);
+    const gender = document.getElementById('gender').value;
+    console.log(username);
+    fetchData(username, password, gender);
+    console.log('Username: ', username, 'Password: ', password, 'gender: ', gender);
+
 };
 
 const form = document.getElementById('form');
 form.addEventListener('submit', handleSubmit);
+
+const fetchData = async (username, password, gender) => {
+    console.log(password)
+    const data = await fetch ('http://localhost:8080/register', {
+        method: 'POST', 
+        body: JSON.stringify({
+            username: username, 
+            password: password,
+            gender: gender
+        })
+    })
+    await data.json()
+    .then(result => {
+        console.log(result)
+    })
+}
+
 
 // const insertUser = async (username, password) => {
 //   try {
