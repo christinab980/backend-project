@@ -46,6 +46,11 @@ body, html {
     width: 100px;
 }
 
+.comic-page-display-container{
+    display: flex;
+    justify-content: center;
+}
+
 .comic-name, .comic-page-name, .comic-page-comic-name, .trending-comics-name {
     padding: 0.5em 0 0.8em 0;
     color: grey;
@@ -97,7 +102,17 @@ body, html {
 
 .comic-page-results-container {
     display: flex;
-    width: 500px;
+    width: 700px;
+}
+
+.comic-page-show-comics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    justify-content: center;
 }
 
 .comic-page-character-img {
@@ -124,11 +139,17 @@ body, html {
 }
 
 .comic-page-character-description {
-    text-align: justify;
+    text-align: center;
     color: grey;
     font-weight: 300;
     line-height: 1.2em;
     margin-left: 10px;
+}
+
+.comic-page-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .character-description, .character-specifics {
@@ -166,6 +187,7 @@ body, html {
 }
 
 .comic-page-img-container img {
+    display: flex;
     height: 11em;
     gap: 10px;
     justify-content: center;
@@ -219,7 +241,7 @@ body, html {
 }
 
 .comic-page-character-name {
-    text-align: left;
+    text-align: center;
     color: #323232;
     text-transform: uppercase;
     font-size: 1.2em;

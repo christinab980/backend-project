@@ -39,11 +39,56 @@ const privateKey = 'bd3e13633fefcb16b1f1d283c66344f1dbddc5ef';
 const timeStamp = 1683240244972;
 const hashValue = '2db36f8a451b0bbf1883bccc24d901af';
 
+//register page 
+const form = document.getElementById('form')
+
 let date = new Date();
 console.log(date.getTime());
 let characterIdValue = "";
 let fetchCharactersforLandingPlace = ["falcon", "daredevil", "thor (goddess of thunder)", "adam warlock", "hulk"];
 let fetchCharactersArray = ["thor", "iron man", "hulk", "Spider-man (Peter Parker)", "She-Hulk (Jennifer Walters)", "captain america", "Spider-Man (Miles Morales)", "THANOS"];
+
+if(window.location.pathname === '/register') {
+  
+ async function registerUser(username, password, gender) {
+    console.log('something')
+    const url = 'http://localhost:8080/register';
+    const data = {
+      username: username,
+      password: password,
+      gender: gender
+    };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        return data;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        throw error;
+      });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const gender = document.getElementById('gender').value;
+    console.log('Username: ',username, 'Password: ',password, 'Gender: ' ,gender);
+    registerUser(username, password, gender)
+};
+
+form.addEventListener('submit',handleSubmit)
+
+}
 
 if(window.location.pathname === '/login') {
   const form = document.getElementById('form');
@@ -59,13 +104,45 @@ if(window.location.pathname === '/login') {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data);
-    const response = await doLogin(stringified);
-    location.href = response.redirectTo;
-    location.href = response.redirectTo;
-    console.log(`The user is logged in: ${response.isAuthenticated}`)
+    try {
+      const response = await loginUser(username, password);
+      console.log(`Successful login`);
+    } catch (error) {
+      console.error('Error: ', error);
+    }
   };
+
+  async function loginUser (username, password) {
+    const url = 'http://localhost:8080/login';
+    const data = {
+      username: username,
+      password: password,
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+    return fetch(url, options)
+      .then(response => response.json())
+      .then(data => {
+
+        console.log('Success:', data);
+        location.href = data.redirectTo;
+        return data;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        throw error;
+      });
+  }
 
   renderForm();
   form.addEventListener('submit', handleSubmit);

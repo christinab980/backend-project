@@ -36,8 +36,8 @@ const cn = {
   host: 'localhost',
   port: 5432,
   database: 'login',
-  user: 'postgres',
-  password: 'password',
+  user: 'christinabarron',
+  password: '1234' ,
   allowExitOnIdle: true
 };
 
@@ -73,7 +73,31 @@ server.get('/login', (req, res) => {
     });
  });
 
- server.post('/login', (req, res) => {
+
+server.post('/login', async(req, res) => {
+   const {username, password} = req.body
+   const foundUser = await db.any(`SELECT * FROM userPassword WHERE username = $1`, [username])
+   console.log(foundUser[0].password)
+  
+   if (foundUser.length > 0) {
+   bcrypt.compare(password, foundUser[0].password, (err, result) => {
+       if (err) {
+         console.log('Error comparing passwords:', err);
+       } else if (result) {
+         console.log('Passwords Match!'); 
+         req.session.userID = username;
+         res.send(foundUser)
+         res.redirect('http://localhost:8080/profile')
+       } else {
+         console.log('Passwords do not Match! *sadface*');
+       }
+     });
+   } else {
+       res.send('incorrect username/password')
+   }
+})
+
+ server.post('/2login2', (req, res) => {
    const afterlogin = {
       isAuthenticated: false,
       redirectTo: '/login'
@@ -127,26 +151,12 @@ server.get("/allusers", async(req, res) => {
    res.send(data)
 })
 
-server.post('/login', async(req, res) => {
-   const {username, password} = req.body
-   const foundUser = await db.any(`SELECT * FROM userPassword WHERE username = $1`, [username])
-   console.log(foundUser[0].password)
-   
-   bcrypt.compare(password, foundUser[0].password, (err, result) => {
-       if (err) {
-         console.log('Error comparing passwords:', err);
-       } else if (result) {
-         console.log('Passwords Match!');
-       } else {
-         console.log('Passwords do not Match! *sadface*');
-       }
-     });
-   if (foundUser.length > 0) {
-   res.send(foundUser)
-   } else {
-       res.send('incorrect username/password')
-   }
-})
+server.get('/register', (req, res) => {
+   res.render('index', {
+    locals: { home, navs, search },
+    partials: setMainView('register')
+   });
+});
 
 server.post('/register', async(req,res) => {
    const {username, password, gender} = req.body
