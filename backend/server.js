@@ -23,10 +23,29 @@ server.use(sessions({
    resave: false
 }));
 
-const validCreds = {
-   password: '1234',
-   username: 'anna'
+const pgp = require('pg-promise')();
+
+const bodyParser = require('body-parser')
+
+// const server = express();
+const bcrypt = require('bcrypt')
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
+
+const cn = {
+  host: 'localhost',
+  port: 5432,
+  database: 'login',
+  user: 'postgres',
+  password: 'password',
+  allowExitOnIdle: true
 };
+
+// Marcus insert
+
+const db = pgp(cn);
+
+// Marcus end
 
 server.engine('html', es6Renderer);
 server.set('views', 'views');
@@ -101,7 +120,46 @@ server.get('/login', (req, res) => {
     });
  });
 
+// ***Marcus insert pt 2
+
+server.get("/allusers", async(req, res) => {
+   const data = await db.any(`SELECT * FROM userPassword`)
+   res.send(data)
+})
+
+server.post('/login', async(req, res) => {
+   const {username, password} = req.body
+   const foundUser = await db.any(`SELECT * FROM userPassword WHERE username = $1`, [username])
+   console.log(foundUser[0].password)
+   
+   bcrypt.compare(password, foundUser[0].password, (err, result) => {
+       if (err) {
+         console.log('Error comparing passwords:', err);
+       } else if (result) {
+         console.log('Passwords Match!');
+       } else {
+         console.log('Passwords do not Match! *sadface*');
+       }
+     });
+   if (foundUser.length > 0) {
+   res.send(foundUser)
+   } else {
+       res.send('incorrect username/password')
+   }
+})
+
+server.post('/register', async(req,res) => {
+   const {username, password, gender} = req.body
+   const saltRounds = 10
+   const hash = await bcrypt.hash(password, saltRounds)
+   console.log('hashedPassword', hash)
+   const newUser = await db.any(`INSERT INTO userPassword (username, password, gender) VALUES ($1, $2, $3)`, [username, hash, gender])
+   res.send (newUser)
+})
+
+// ***Marcus insert pt 2 end
 
 server.listen(PORT, () =>
     console.log(`This server is running at POST ${PORT}`)    
 )
+

@@ -1,0 +1,1 @@
+CREATE TABLE userPassword (username: TEXT, password: TEXT);
