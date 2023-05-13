@@ -32,12 +32,13 @@ const bcrypt = require('bcrypt')
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 
+
 const cn = {
-  host: 'localhost',
+  host: 'dpg-chfd8rik728sd6hpul40-a',
   port: 5432,
-  database: 'login',
-  user: 'christinabarron',
-  password: '1234' ,
+  database: 'login_riwm',
+  user: 'login_riwm_user',
+  password: 'ZBrWod7LZGPxW1trIRK9qOg4Mapc5u5x' ,
   allowExitOnIdle: true
 };
 
@@ -56,7 +57,7 @@ const PORT = process.env.PORT || 8080;
 server.get('/', (req, res) => {
    res.render('index', {
     locals: { home, navs, search },
-    partials: setMainView('landing')
+    partials: setMainView('login')
    });
 });
 
@@ -66,13 +67,19 @@ server.get('/heartbeat', (req, res) => {
     });
  });
 
-server.get('/login', (req, res) => {
+server.get('/home', (req, res) => {
     res.render('index', {
      locals: { home, navs, search },
-     partials: setMainView('login')
+     partials: setMainView('landing')
     });
  });
 
+ server.get('/login', (req, res) => {
+   res.render('index', {
+    locals: { home, navs, search },
+    partials: setMainView('login')
+   });
+});
 
 server.post('/login', async(req, res) => {
    const {username, password} = req.body
@@ -87,7 +94,6 @@ server.post('/login', async(req, res) => {
          console.log('Passwords Match!'); 
          req.session.userID = username;
          res.send(foundUser)
-         res.redirect('http://localhost:8080/profile')
        } else {
          console.log('Passwords do not Match! *sadface*');
        }

@@ -52,7 +52,7 @@ if(window.location.pathname === '/register') {
   
  async function registerUser(username, password, gender) {
     console.log('something')
-    const url = 'http://localhost:8080/register';
+    const url = '/register';
     const data = {
       username: username,
       password: password,
@@ -90,7 +90,7 @@ form.addEventListener('submit',handleSubmit)
 
 }
 
-if(window.location.pathname === '/login') {
+if(window.location.pathname === '/') {
   const form = document.getElementById('form');
   const credsContainer = form.querySelector('#credentials-container');
 
@@ -109,15 +109,16 @@ if(window.location.pathname === '/login') {
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data);
     try {
-      const response = await loginUser(username, password);
+      await loginUser(username, password);
       console.log(`Successful login`);
+      window.location.href = ('/home')
     } catch (error) {
       console.error('Error: ', error);
     }
   };
 
   async function loginUser (username, password) {
-    const url = 'http://localhost:8080/login';
+    const url = '/login';
     const data = {
       username: username,
       password: password,
@@ -135,8 +136,7 @@ if(window.location.pathname === '/login') {
       .then(data => {
 
         console.log('Success:', data);
-        location.href = data.redirectTo;
-        return data;
+        return data.redirectTo;
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -1114,7 +1114,7 @@ fetchCharcters()
 
 }
 
-if(window.location.pathname === '/') {
+if(window.location.pathname === '/home') {
 
 
   async function fetchCharctersforLandingPlace() {
