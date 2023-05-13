@@ -52,7 +52,8 @@ if(window.location.pathname === '/register') {
   
  async function registerUser(username, password, gender) {
     console.log('something')
-    const url = '/register';
+    // const url = '/register';
+    const url = 'http://localhost:8080/register';
     const data = {
       username: username,
       password: password,
@@ -77,13 +78,21 @@ if(window.location.pathname === '/register') {
       });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const gender = document.getElementById('gender').value;
     console.log('Username: ',username, 'Password: ',password, 'Gender: ' ,gender);
     registerUser(username, password, gender)
+    try {
+      await registerUser(username, password);
+      console.log(`Successful login`);
+      // window.location.href = ('/home')
+      window.location.href = ('http://localhost:8080/home')
+    } catch (error) {
+      console.error('Error: ', error);
+    }
 };
 
 form.addEventListener('submit',handleSubmit)
@@ -111,7 +120,8 @@ if(window.location.pathname === '/') {
     try {
       await loginUser(username, password);
       console.log(`Successful login`);
-      window.location.href = ('/home')
+      // window.location.href = ('/home')
+      window.location.href = ('http://localhost:8080/home')
     } catch (error) {
       console.error('Error: ', error);
     }

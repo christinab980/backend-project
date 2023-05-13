@@ -33,14 +33,23 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 
 
+// const cn = {
+//   host: 'dpg-chfd8rik728sd6hpul40-a',
+//   port: 5432,
+//   database: 'login_riwm',
+//   user: 'login_riwm_user',
+//   password: 'ZBrWod7LZGPxW1trIRK9qOg4Mapc5u5x' ,
+//   allowExitOnIdle: true
+// };
+
 const cn = {
-  host: 'dpg-chfd8rik728sd6hpul40-a',
-  port: 5432,
-  database: 'login_riwm',
-  user: 'login_riwm_user',
-  password: 'ZBrWod7LZGPxW1trIRK9qOg4Mapc5u5x' ,
-  allowExitOnIdle: true
-};
+   host: 'localhost',
+   port: 5432,
+   database: 'login',
+   user: 'christinabarron',
+   password: '1234' ,
+   allowExitOnIdle: true
+ };
 
 // Marcus insert
 
