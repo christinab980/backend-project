@@ -264,11 +264,13 @@ body, html {
     align-items: center;
 }
 
-.credentials-container {
+.credentials-container, .form {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     width: 180px ;
+    justify-content: center;
+    align-items: center;
 }
 
 .credentials-container input {
@@ -360,6 +362,11 @@ footer {
 
 footer img {
     height: 50px;
+}
+
+.form input {
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 header {
@@ -655,6 +662,20 @@ p {
     flex-direction: column;
 }
 
+.register-link {
+    display: flex;
+    justify-content: center;
+    color: #323232;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    color: #bbb;
+}
+
 .search-icon {
     text-align: center;
 }
@@ -676,7 +697,6 @@ p {
     display: flex;
     padding: 1em;
     gap: 10px;
-    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
 }
@@ -781,15 +801,28 @@ p {
         text-align: center;
     }
 
+    .charcter-page-display-container {
+        display: flex;
+        justify-content: center;
+    }
+
     .comic-page-container {
         gap: 10px;
     }
 
+    .comic-page-img-container {
+        display: flex;
+    }
+
     .comic-page-img-container img {
         justify-content: center;
-        margin: 10px;
         margin-bottom: 0;
         height: 16em;
+    }
+
+    .comic-page-character-description{
+        margin-left: 100px;
+        margin-right: 100px;
     }
 
     .comic-page-name {
@@ -827,6 +860,7 @@ p {
         width: auto;
     }
 
+
     .input-container {
         display: flex;
     }
@@ -839,8 +873,10 @@ p {
         padding: 1.3rem;
         min-height: 250px;
         position: absolute;
-        top: 50%;
-        left: 9%;
+        top: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
         background-color: white;
         border: 1px solid #ddd;
         border-radius: 15px;
@@ -848,8 +884,7 @@ p {
     }
 
     .show-comics {
-        margin-left: 150px;
-        margin-right: 150px;
+        flex-wrap: wrap;
     }
 
     .trending-container {

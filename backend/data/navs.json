@@ -8,16 +8,6 @@
       "name": "Comics"
     },
     {
-      "href": "/profile",
-      "isPrivate": true,
-      "name": "Profile"
-    },
-    {
-      "href": "/login",
-      "isPrivate": false,
-      "name": "Login"
-    },
-    {
       "href": "/logout",
       "isPrivate": true,
       "name": "Logout"

@@ -155,7 +155,7 @@ if(window.location.pathname === '/') {
     <div class="input-field">
         <input type="password" name="password" id="password" placeholder="Enter Password">
     </div>
-    <input type="submit" value="LogIn">
+    <input type="submit" value="Log In">
     `;
     credsContainer.innerHTML = html;
   }
